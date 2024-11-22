@@ -1,1 +1,23 @@
-Calcular el temps que tarda a executar el programa
+Entrar a kahan:
+
+  Amb l'ordre ssh -Y -l login@alumno.upv.es kahan.dsic.upv.es
+  Compilar el codi fora de la carpeta w
+  Crar fitcher .sh:
+    #!/bin/bash
+    #SBATCH --nodes=1
+    #SBATCH --time=5:00
+    #SBATCH --partition=cpa
+    OMP_NUM_THREADS=3 ./pintegral 1
+
+    Codi que s'executa el programa pintegral amb 3 fils
+
+Exercici 3:
+
+  Executar en kahan amb 32 fils i diferents planificacions:
+    - Planificació en la qual a cada fil se li assigna un sol bloc d’iteracions consecutives, sent els blocs dels diferents fils aproximadament de la mateixa grandària.
+    - Planificació en la qual les iteracions s’assignen a fils de manera cíclica o round-robin (amb blocs d’una sola iteració).
+    - Planificació dinàmica, amb blocs d’una iteració.
+
+Exercici 4:
+  
+  [continuar]
