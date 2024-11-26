@@ -185,6 +185,11 @@ int main(int argc, char *argv[]) {
     free(nclose);
     return -1;
   }
+  #pragma omp parallel
+  {
+    numhilos = omp_get_num_threads();
+  }
+  printf("Num hilos: %d\n", numhilos);
 
   t1 = omp_get_wtime();
   process(ns, samples, delta, mindiff, maxdiff, nclose);
