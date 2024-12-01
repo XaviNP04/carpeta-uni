@@ -122,37 +122,34 @@ void process(int ns, char *samples[], int delta, int mindiff[], int maxdiff[], i
     nclose[i] = 0;
   }
   // =================================================================================================================================
-  #pragma omp parallel for private(j, d, nclose_i, mind_i, maxd_i)
-  for (i=0; i<ns; i++) {
-    nclose_i = 0;
-    mind_i = MAX_LEN+1;
-    maxd_i = 0;
-    for (j=i+1; j<ns; j++) {
-      d = difference(samples[i],samples[j]);
-      // Update min and max differences for sample i
+#pragma omp parallel for private(j, d) 
+  for (i = 0; i < ns; i++) {
+    int nclose_i = 0;
+    int mind_i = MAX_LEN + 1;
+    int maxd_i = 0;
 
-      if ( d < mind_i ) mind_i = d;
-      if ( d > maxd_i ) maxd_i = d;
+    for (j = i + 1; j < ns; j++) {
+      d = difference(samples[i], samples[j]);
 
-      // Update min and max differences for sample j
-      if ( d < mindiff[j] ) mindiff[j] = d;
-      if ( d > maxdiff[j] ) maxdiff[j] = d;
+      if (d < mind_i) mind_i = d;
+      if (d > maxd_i) maxd_i = d;
 
-      // Update close counts for samples i and j
-      if ( d < delta ) {
+      #pragma omp critical
+      {
+        if (d < mindiff[j]) mindiff[j] = d;
+        if (d > maxdiff[j]) maxdiff[j] = d;
+      }
+
+      if (d < delta) {
         nclose_i++;
         #pragma omp atomic
         nclose[j]++;
       }
-
     }
-    // Update close counts for sample i
 
     nclose[i] += nclose_i;
-
-    // Update min and max differences for sample i
-    if ( mind_i < mindiff[i] ) mindiff[i] = mind_i;
-    if ( maxd_i > maxdiff[i] ) maxdiff[i] = maxd_i;
+    if (mind_i < mindiff[i]) mindiff[i] = mind_i;
+    if (maxd_i > maxdiff[i]) maxdiff[i] = maxd_i;
   }
   // =================================================================================================================================
 }
