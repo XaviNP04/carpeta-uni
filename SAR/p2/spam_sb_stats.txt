@@ -1,0 +1,215 @@
+Lines: 11
+Number words (including stopwords): 77
+Vocabylary size: 20
+Number of symbols: 276
+Number of different symbols: 28
+Words (alphabetical order):
+	Bacon: 6
+	Egg: 8
+	Lobster: 1
+	Mornay: 1
+	Sausage: 1
+	Spam: 27
+	Thermidor: 1
+	aux: 1
+	baked: 1
+	beans: 1
+	brandy: 1
+	crevettes: 1
+	egg: 1
+	fried: 1
+	garnished: 1
+	pate: 1
+	sauce: 1
+	sausage: 3
+	top: 1
+	truffle: 1
+Words (by frequency):
+	Spam: 27
+	Egg: 8
+	Bacon: 6
+	sausage: 3
+	Lobster: 1
+	Mornay: 1
+	Sausage: 1
+	Thermidor: 1
+	aux: 1
+	baked: 1
+	beans: 1
+	brandy: 1
+	crevettes: 1
+	egg: 1
+	fried: 1
+	garnished: 1
+	pate: 1
+	sauce: 1
+	top: 1
+	truffle: 1
+Symbols (alphabetical order):
+	B: 6
+	E: 8
+	L: 1
+	M: 1
+	S: 28
+	T: 1
+	a: 49
+	b: 4
+	c: 8
+	d: 5
+	e: 17
+	f: 3
+	g: 23
+	h: 2
+	i: 3
+	k: 1
+	l: 1
+	m: 28
+	n: 10
+	o: 10
+Symbols (by frequency):
+	a: 49
+	p: 29
+	S: 28
+	m: 28
+	g: 23
+	e: 17
+	s: 12
+	n: 10
+	o: 10
+	r: 9
+	E: 8
+	c: 8
+	u: 7
+	B: 6
+	t: 6
+	d: 5
+	b: 4
+	f: 3
+	i: 3
+	h: 2
+Word pairs (alphabetical order):
+	$ Egg: 5
+	$ Lobster: 1
+	$ Spam: 5
+	Bacon $: 2
+	Bacon sausage: 2
+	Egg Bacon: 2
+	Egg Sausage: 1
+	Egg Spam: 1
+	Egg sausage: 1
+	Lobster Thermidor: 1
+	Mornay sauce: 1
+	Spam $: 9
+	Spam Bacon: 2
+	Spam Egg: 3
+	Spam Spam: 11
+	Spam baked: 1
+	Thermidor aux: 1
+	aux crevettes: 1
+	baked beans: 1
+	beans Spam: 1
+Word pairs (by frequiency):
+	Spam Spam: 11
+	Spam $: 9
+	$ Egg: 5
+	$ Spam: 5
+	Spam Egg: 3
+	Bacon $: 2
+	Bacon sausage: 2
+	Egg Bacon: 2
+	Spam Bacon: 2
+	$ Lobster: 1
+	Egg Sausage: 1
+	Egg Spam: 1
+	Egg sausage: 1
+	Lobster Thermidor: 1
+	Mornay sauce: 1
+	Spam baked: 1
+	Thermidor aux: 1
+	aux crevettes: 1
+	baked beans: 1
+	beans Spam: 1
+Symbol pairs (alphabetical order):
+	Ba: 6
+	Eg: 8
+	Lo: 1
+	Mo: 1
+	Sa: 1
+	Sp: 27
+	Th: 1
+	ac: 6
+	ag: 4
+	ak: 1
+	am: 27
+	an: 2
+	ar: 1
+	at: 1
+	au: 6
+	ay: 1
+	ba: 1
+	be: 1
+	br: 1
+	bs: 1
+Symbol pairs (by frequiency):
+	pa: 28
+	Sp: 27
+	am: 27
+	gg: 9
+	Eg: 8
+	sa: 8
+	Ba: 6
+	ac: 6
+	au: 6
+	co: 6
+	on: 6
+	ag: 4
+	ge: 4
+	us: 4
+	ed: 3
+	te: 3
+	an: 2
+	er: 2
+	he: 2
+	or: 2
+Prefixes (by frequiency):
+	Sp-: 27
+	Spa-: 27
+	Eg-: 8
+	Ba-: 6
+	Bac-: 6
+	Baco-: 6
+	sa-: 4
+	sau-: 4
+	saus-: 3
+	Lo-: 1
+	Lob-: 1
+	Lobs-: 1
+	Mo-: 1
+	Mor-: 1
+	Morn-: 1
+	Sa-: 1
+	Sau-: 1
+	Saus-: 1
+	Th-: 1
+	The-: 1
+Suffixes (by frequiency):
+	-am: 27
+	-pam: 27
+	-gg: 9
+	-acon: 6
+	-con: 6
+	-on: 6
+	-age: 4
+	-ge: 4
+	-sage: 4
+	-ed: 3
+	-aked: 1
+	-andy: 1
+	-ans: 1
+	-ate: 1
+	-auce: 1
+	-ay: 1
+	-ce: 1
+	-dor: 1
+	-dy: 1
+	-eans: 1
