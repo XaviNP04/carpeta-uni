@@ -1,0 +1,49 @@
+HACER #######################################################
+[~] Coordinación vía paso de mensajes (30%)
+[ ] Servicios nuevos (30%)
+[ ] Comportamientos internos de los agentes (30%): se deben realizar mejoras de comportamientos
+[ ] Acción interna (opcional 10%)
+
+LANZAR PARTIDA ##############################################
+
+pygomas manager -j m@localhost -sj s@localhost -m map_01 -np 6
+
+pygomas run -g pygomas_local.json
+
+pygomas render
+
+
+MOVIMIENTO ##################################################
+
+.goto([X,Y,Z]) Cuando llega a la posicion se añade la creencia target_reached
+
+.stop
+
+.turn(R) Gira agente R radiantes
+
+.look_at([X,Y,Z]) Orienta al agente a [X, Y, Z]
+
+.create_control_points([X,Y,Z], D, N, C) Crea grupo de N puntos de control aleatorios a una distancia D de una posición [X,Y,Z], la lista de puntos se ordena en C
+
+ENVIAR MENSAJES #############################################
+
+.send(Agent, Performative, message_body)
+  ej: .send(M, tell, saveme)
+
+.register_service("service_a")
+
+.get_medics
+
+.get_fieldops
+
+.get_backups
+
+.get_service("service_a")
+
+OTROS ######################################################
+
+.shoot(N, [X,Y,Z]) Dispara N veces a la posición [X,Y,Z]
+
+.cure Crea paquete de medicina, solo medicos
+
+.reload Crea paquetes de municion, solo field operators

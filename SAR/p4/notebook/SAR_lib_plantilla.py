@@ -1,44 +1,32 @@
+# versión 1.1
+
 import json
 import os
 import re
 import sys
-import math
 from pathlib import Path
 from typing import Optional, List, Union, Dict
 import pickle
-import numpy as np
-import nltk
 
-
+# INICIO CAMBIO EN v1.1
 ## UTILIZAR PARA LA AMPLIACION
-if False:
-    from nltk.tokenize import sent_tokenize
-    import sentence_transformers
-    from scipy.spatial import KDTree
-    from scipy.spatial.distance import cosine
-    nltk.download('punkt')
+# Selecciona un modelo semántico
+SEMANTIC_MODEL = "SBERT"
+#SEMANTIC_MODEL = "BetoCLS"
+#SEMANTIC_MODEL = "Beto"
+#SEMANTIC_MODEL = "Spacy"
+#SEMANTIC_MODEL = "Spacy_noSW_noA"
 
-    def cosine_similarity(v1, v2):
-        """
-        
-        Calcula la similitud coseno de dos vectores. La funcion 'cosine' devuelve la 'distancia coseno'
-        
-        similitud_coseno = 1 - distancia_coseno
-        
-        """
-        return 1 - cosine(v1, v2)
+def create_semantic_model(modelname):
+    assert modelname in ("SBERT", "BetoCLS", "Beto", "Spacy", "Spacy_noSW_noA")
+    
+    if modelname == "SBERT": return SentenceBertEmbeddingModel()    
+    elif modelname == "BetoCLS": return BetoEmbeddingCLSModel()
+    elif modelname == "Beto": return BetoEmbeddingModel()
+    elif modelname == "Spacy": SpacyStaticModel(remove_stopwords=False, remove_noalpha=False)
+    return SpacyStaticModel()
+# FIN CAMBIO EN v1.1
 
-    def euclidean_to_cosine(d:float):
-        """
-        
-        Pasa de distancia euclidea DE VECTORES NORMALIZADOS a similitud coseno. 
-        
-        """
-        return 1 - d**2/2
-        
-        
-
-    SEMANTIC_MODEL = "jaimevera1107/all-MiniLM-L6-v2-similarity-es"
 
 class SAR_Indexer:
     """
@@ -52,8 +40,6 @@ class SAR_Indexer:
     Los metodos que se añadan se deberan documentar en el codigo y explicar en la memoria
     """
 
-
-    
     # campo que se indexa
     DEFAULT_FIELD = 'all'
     # numero maximo de documento a mostrar cuando self.show_all es False
@@ -191,9 +177,13 @@ class SAR_Indexer:
         
         """
         if self.model is None:
-            print(f"loading {modelname} model ... ",end="")
-            self.model = sentence_transformers.SentenceTransformer(modelname)
-            print("done!")
+            # INICIO CAMBIO EN v1.1
+            print(f"loading {modelname} model ... ",end="", file=sys.stderr)             
+            self.model = create_semantic_model(modelname)
+            print("done!", file=sys.stderr)
+            # FIN CAMBIO EN v1.1
+
+            
             
 
     def update_embeddings(self, txt:str, artid:int):
@@ -592,7 +582,10 @@ class SAR_Indexer:
             if len(line) > 0 and line[0] != '#':
                 query, ref = line.split('\t')
                 reference = int(ref)
-                result, _ = len(self.solve_query(query))
+                # INICIO CAMBIO EN v1.1
+                result, _ = self.solve_query(query)
+                result = len(result)
+                # FIN CAMBIO EN v1.1
                 if reference == result:
                     print(f'{query}\t{result}')
                 else:

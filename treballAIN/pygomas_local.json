@@ -1,0 +1,60 @@
+{
+    "host": "localhost",
+    "manager": "m",
+    "manager_password": "secret",
+    "service": "s",
+    "service_password": "secret",
+    "axis":
+    [
+        {
+            "rank": "Code.BDICode",
+            "name": "vlc_axis",
+            "password": "secret",
+            "amount": 2,
+            "asl": "bdisoldier_new.asl"
+        },
+        {
+            "rank": "BDIMedic",
+            "name": "vlc_medic_axis",
+            "password": "secret",
+            "asl": "bdimedic_test.asl"
+        },
+        {
+            "rank": "BDIFieldOp",
+            "name": "vlc_fieldop_axis_test",
+            "password": "secret",
+            "asl": "bdifieldop_test.asl"
+        }
+    ],
+    "allied":
+    [
+        {
+            "rank": "Code.BDICode",
+            "name": "vlc_lider",
+            "password": "secret",
+            "amount": 1,
+            "asl": "bdisoldier_lider.asl"
+        },
+        {
+            "rank": "BDISoldier",
+            "name": "vlc_allied",
+            "password": "secret",
+            "amount": 2,
+            "asl": "bdisoldier_new.asl"
+        },
+        {
+            "rank": "BDIMedic",
+            "name": "vlc_medic_allied",
+            "password": "secret",
+            "amount": 2,
+            "asl": "bdimedic_test.asl"
+        },
+        {
+            "rank": "BDIFieldOp",
+            "name": "vlc_fieldop_allied",
+            "password": "secret",
+            "amount": 2,
+            "asl": "bdifieldop_test.asl"
+        }
+    ]
+  }
