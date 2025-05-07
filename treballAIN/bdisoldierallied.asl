@@ -6,15 +6,11 @@
 // #mmmmm#"   ##mm##   ##mmmmmm  ##mmm##    mm##mm   ##mmmmmm  ##    ##
 //  """""      """"    """"""""  """""      """"""   """"""""  ""    """
 
-//TEAM_AXIS ############################################
-
 //TEAM_ALLIED ############################################
 
 +flag (F): team(100)
   <-
   .print("SOLDADO").
-
-// enviar mensaje a lider
 
 +flag_taken: team(100)
   <-
@@ -34,24 +30,32 @@
   <- 
   .shoot(3,Position).
 
-// COM COLLONS LI DONE UNA POSICIÓ A CADA UN
-
 +target_reached(T): formando
   <-
+  -formando;
   ?flag(F);
   .look_at(F);
+  ?lider(L);
+  .send(L, tell, llegada).
+
++mover
+  <-
+  .print("mover");
+  ?flag(F);
   .goto(F).
 
-+formacion(Pos)
++target_reached(T)
   <-
+  ?base(B);
+  .goto(B).
+
++formacion(Pos)[source(A)]
+  <-
+  +lider(A);
   +formando;
   .goto(Pos).
 
 // NUEVAS FUNCIONES
-// ayuda_pedida: 
-// enemigos_encontrados:
-//
-// ACABAR DE COMPLETAR
 
 +health(H): team(100) & H < 50 & not(ayuda_pedida)
   <-
@@ -78,7 +82,6 @@
   <-
   .print("Pido ayuda medica");
   ?position(Pos);
-  +propuestas([]);
   +agentes([]);
   .send(M, tell, necesito_ayuda(Pos));
   .wait(1000);
@@ -88,29 +91,26 @@
 +miPosicion(Pos)[source(A)]: ayuda_pedida
   <-
   .print("Recibo propuesta");
-  ?propuestas(B);
-  .concat(B,[Pos], B1);
-  -+propuestas(B1);
   ?agentes(Ag);
   .concat(Ag,[A], Ag1);
   -+agentes(Ag1);
   -miPosicion(Pos).
 
-+!elegirAgente: propuestas(Pr) & agentes(Ag)
++!elegirAgente
   <-
-  .print("Selecciono el mejor: ", Pr, Ag);
-  .nth(0, Pr, Pos); // seguramente no necesito la posicion
+  ?agentes(Ag);
+  .length(Ag, L);
+  if(L > 0){
+  .print("Selecciono el mejor: ", Ag);
   .nth(0, Ag, A);
   .send(A, tell, aceptopropuesta);
   .delete(0, Ag, Ag1);
   .send(Ag1, tell, niegopropuesta);
-  -+propuestas([]);
-  -+agentes([]).
-
-+!elegirAgente: not(propuestas(Pr))
-  <-
-  .print("nadie me puede ayudar");
-  -ayuda_pedida.
+  -+agentes([]);
+  } else {
+  -ayuda_pedida;
+  .print("NADIE ME PUEDE AYUDAR");
+  }.
 
 //░█▀█░█░█░▀▀█░█▀█░░░█▀█░█▀█░█▀▀░█▀▄░█▀█░█▀▄░▀█▀░█▀█
 //░█▀▀░█░█░░░█░█▀█░░░█░█░█▀▀░█▀▀░█▀▄░█▀█░█▀▄░░█░░█░█
@@ -126,7 +126,6 @@
   <-
   .print("Pido ayuda operario");
   ?position(Pos);
-  +propuestasMun([]);
   +agentesMun([]);
   .send(F, tell, necesito_municion(Pos));
   .wait(1000);
@@ -137,27 +136,25 @@
 +miMunicion(Pos)[source(A)]: municion_pedida
   <-
   .print("RECIBO PROPUESTA DE MUNICION");
-  ?propuestasMun(Pm);
-  .concat(Pm, [Pos], Pm1);
-  -+propuestasMun(Pm1);
   ?agentesMun(Am);
   .concat(Am, [A], Am1);
   -+agentesMun(Am1);
   -miMunicion(Pos).
 
 //3
-+!elegirMunicion: propuestasMun(Pm) & agentesMun(Am)
++!elegirMunicion
   <-
-  .print("Selecciono operario: ", Pm, Am);
-  .nth(0, Pm, Pos);
+  ?agentesMun(Am);
+  .length(Am, L);
+  if(L > 0) {
+  .print("Selecciono operario: ", Am);
   .nth(0, Am, A);
   .send(A, tell, aceptopropuesta);
   .delete(0, Am, Am1);
   .send(Am1, tell, niegopropuesta);
-  -+propuestas([]);
-  -+agentes([]).
+  -+agentes([]);
+  } else {
+  -municion_pedida;
+  .print("NADIE ME PUEDE DAR MUNICION");
+  }.
 
-+!elegirMunicion: not(propuestasMun(Pm))
-  <-
-  .print("nadie me puede ayudar");
-  -municion_pedida.

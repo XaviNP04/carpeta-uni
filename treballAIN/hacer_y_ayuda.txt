@@ -1,10 +1,11 @@
-HACER #######################################################
-[~] Coordinación vía paso de mensajes (30%)
-[ ] Servicios nuevos (30%)
-[ ] Comportamientos internos de los agentes (30%): se deben realizar mejoras de comportamientos
-[ ] Acción interna (opcional 10%)
+HACER
 
-LANZAR PARTIDA ##############################################
+- Coordinación vía paso de mensajes (30%)
+- Servicios nuevos (30%)
+- Comportamientos internos de los agentes (30%): se deben realizar mejoras de comportamientos
+- Acción interna (opcional 10%)
+
+LANZAR PARTIDA
 
 pygomas manager -j m@localhost -sj s@localhost -m map_01 -np 6
 
@@ -13,7 +14,7 @@ pygomas run -g pygomas_local.json
 pygomas render
 
 
-MOVIMIENTO ##################################################
+MOVIMIENTO
 
 .goto([X,Y,Z]) Cuando llega a la posicion se añade la creencia target_reached
 
@@ -25,7 +26,7 @@ MOVIMIENTO ##################################################
 
 .create_control_points([X,Y,Z], D, N, C) Crea grupo de N puntos de control aleatorios a una distancia D de una posición [X,Y,Z], la lista de puntos se ordena en C
 
-ENVIAR MENSAJES #############################################
+ENVIAR MENSAJES
 
 .send(Agent, Performative, message_body)
   ej: .send(M, tell, saveme)
@@ -40,7 +41,7 @@ ENVIAR MENSAJES #############################################
 
 .get_service("service_a")
 
-OTROS ######################################################
+OTROS
 
 .shoot(N, [X,Y,Z]) Dispara N veces a la posición [X,Y,Z]
 

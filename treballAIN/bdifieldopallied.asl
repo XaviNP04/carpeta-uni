@@ -6,8 +6,6 @@
 // ##         mm##mm   ##mmmmmm  ##mmmmmm  ##mmm##    ##mm##   ##
 // ""         """"""   """"""""  """"""""  """""       """"    ""
 
-//TEAM_AXIS
-
 //TEAM_ALLIED 
 
 +flag (F): team(100) 
@@ -34,18 +32,34 @@
 
 +target_reached(T): formando
   <-
+  -formando;
   ?flag(F);
   .look_at(F);
+  ?lider(L);
+  .send(L, tell, llegada).
+
++mover
+  <-
+  .print("mover");
+  ?flag(F);
   .goto(F).
 
-+formacion(Pos)
++target_reached(T)
   <-
+  ?base(B);
+  .goto(B).
+
++formacion(Pos)[source(A)]
+  <-
+  +lider(A);
   +formando;
   .goto(Pos).
 
 //░█▀█░█░█░▀▀█░█▀█
 //░█▀▀░█░█░░░█░█▀█
 //░▀░░░▀▀▀░▀▀░░▀░▀
+
+// Implementacion de puja para dar paquetes de municion a soldados que lo necesiten
 
 //2
 +necesito_municion(Pos)[source(A)]: not(proporcionando_municion(_,_))

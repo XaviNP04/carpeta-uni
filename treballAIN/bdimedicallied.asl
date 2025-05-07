@@ -5,12 +5,6 @@
 // ## "" ##  ##        ##    ##     ##     ##m
 // ##    ##  ##mmmmmm  ##mmm##    mm##mm    ##mmmm#
 // ""    ""  """"""""  """""      """"""      """"
-//TODO
-//proporcionar ayuda
-
-//TEAM_AXIS
-
-
 
 //TEAM_ALLIED 
 
@@ -38,12 +32,26 @@
 
 +target_reached(T): formando
   <-
+  -formando;
   ?flag(F);
   .look_at(F);
+  ?lider(L);
+  .send(L, tell, llegada).
+
++mover
+  <-
+  .print("mover");
+  ?flag(F);
   .goto(F).
 
-+formacion(Pos)
++target_reached(T)
   <-
+  ?base(B);
+  .goto(B).
+
++formacion(Pos)[source(A)]
+  <-
+  +lider(A);
   +formando;
   .goto(Pos).
 

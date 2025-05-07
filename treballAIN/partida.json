@@ -1,0 +1,69 @@
+{
+    "host": "localhost",
+    "manager": "m",
+    "manager_password": "secret",
+    "service": "s",
+    "service_password": "secret",
+
+     "axis": [
+        {
+            "rank": "tacticajefe.Jefe",
+            "name": "Jefe_Axis_Flagbusters",
+            "password": "secret",
+            "amount": 1,
+            "asl": "bdijefeEje.asl"
+
+        },
+		{
+            "rank": "cod_pygomas.SoldadoCuidao",
+            "name": "Soldado_Axis_FlagBusters",
+            "password": "secret",
+            "amount": 4,
+            "asl": "bdiejesoldado.asl"
+        },
+        {
+            "rank": "BDIMedic",
+            "name": "Medico_Axis_Flagbusters",
+            "password": "secret",
+            "amount": 3,
+            "asl": "bdimediceje.asl"
+        },
+        {
+            "rank": "BDIFieldOp",
+            "name": "FieldOp_Axis_Flagbusters",
+            "password": "secret",
+            "amount": 2,
+            "asl": "bdifieldeje.asl"
+        }
+		],
+        "allied":[
+            {
+                "rank": "Code.BDICode",
+                "name": "Jefe_Allied_FlagBusters",
+                "password": "secret",
+                "amount": 1,
+                "asl": "bdisoldier_liderAlied.asl"
+            },
+            {
+                "rank": "BDISoldier",
+                "name": "Soldado_Allied_FlagBusters",
+                "password": "secret",
+                "amount": 4,
+                "asl": "bdisoldierallied.asl"
+            },
+            {
+                "rank": "BDIMedic",
+                "name": "Medico_Allied_FlagBusters",
+                "password": "secret",
+                "amount": 3,
+                "asl": "bdimedicallied.asl"
+            },
+            {
+                "rank": "BDIFieldOp",
+                "name": "FieldOp_Allied_FlagBusters",
+                "password": "secret",
+                "amount": 2,
+                "asl": "bdifieldopallied.asl"
+            }
+        ]
+  }
