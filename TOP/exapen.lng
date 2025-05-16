@@ -1,0 +1,50 @@
+SETS:
+
+Seniors /S1, S2, S3, S4, S5, S6, S7, S8, S9, S10 S11/: SueldoSeniors, capSeniors;
+Aprendices /A1, A2, A3, A4, A5, A6, A7, A8/: SueldoAprendices, capAprencides;
+Turnos /A, B, C, D/; 
+Horas /Prim, Seg, Ter, Cua, Quin, Sex, Sept/: Incidencias, numSeniors, numAprendices;
+
+TurnosHora (Horas, Turnos): HorasPorTurno;
+
+ENDSETS
+DATA:
+capSeniors = 10 10 10 10 10 10 10 10 10 10 10;
+SueldoSeniors = 120 120 120 120 120 120 120 120 120 120 120;
+
+capAprencides = 6 6 6 6 6 6 6 6;
+SueldoAprendices = 70 70 70 70 70 70 70 70;
+
+Incidencias = 60 90 100 60 50 60 30;
+
+HorasPorTurno = 1 0 0 0
+	      1 1 0 0
+	      1 1 1 0
+	      1 1 1 1
+	      0 1 1 1
+	      0 0 1 1
+	      0 0 0 1;
+ENDDATA
+@for(Horas(ho):
+[maxSen] numSeniors(ho) < 11;
+);
+@for(Horas(ho):
+[maxSen] NumAprendices(ho) < 7;
+);
+!incidencias;
+@for(Horas(ho):
+ [incidencias] capSeniors(ho)*numSeniors(ho) + capAprendices(ho)*numAprendices(ho) > Incidencias(ho)
+);
+
+!maximo seniors;
+
+
+
+!maximo aprendices;
+
+
+
+!Minimizar costes teniendo en cuenta los turnos y las incidencias;
+
+MIN=@FOR(TurnsoHora(ho,tu):
+	@SUM(Seniors(se): HorasPorTurno(ho,tu)*SueldoSeniors(ho)*numSeniors(ho) + HorasPorTurno(ho,tu)*SueldoAprendices(ho)*numAprendices(ho);

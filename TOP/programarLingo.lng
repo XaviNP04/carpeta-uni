@@ -6,7 +6,7 @@ Maquina /Cortadora, FresadoraV, FresadoraH, Taladro, Alisadora/ ;
 Producto /P1, P2, P3, P4, P5, P6, P7/: Beneficio;
 
 !Definición de Sets Derivados;
-Fabricacion (Periodo, Productfile:///home/xavi/uni/TOP/programarLingo.lngto): UProducidas, UVendidas, UStock, MaxStock, CosteStock, MaxVentas;
+Fabricacion (Periodo, Producto): UProducidas, UVendidas, UStock, MaxStock, CosteStock, MaxVentas;
 CapMaquinas (Periodo, Maquina): HrsDispMaquina, MaquinasDisp, MaquinasMant;
 HrsProduccion (Maquina, Producto): HrsNecesarias;
 
@@ -64,34 +64,34 @@ MaxVentas= 500 1000 300 300 800 200 100
 	 0 100 500 100 1000 300 0
 	 500 500 100 300 1100 500 60;
 
-ENDATA
+ENDDATA
 
 !Restricciones de equilibrio: Uds. Vendidas mes t + Uds. Stock mes t = Uds. Producidas mes t + Uds. Stock mes (t-1);
 
-@FOR (Periodo(i):
- @FOR (Producto(j):
-  [Equilibrio] UVendidas(i,j) + UStock(i,j) = UProducidas(i,j) + @IF(i#EQ#@INDEX(Periodo,Ene),0,UStock(i - 1, j));
+@FOR(Periodo(Per):
+ @FOR(Producto(Prod):
+  [Equilibrio] UVendidas(Per,Prod) + UStock(Per,Prod) = UProducidas(Per,Prod) + @IF(Per#EQ#@INDEX(Periodo,Ene),0,UStock(Per - 1, Prod));
  );
 );
 
 !Capacidad de producción y disponibilidad de Máquina;
 
-@FOR(CapMaquinas(p,m):
-  [Capacidad]@SUM(Fabricacion(p,i):HrsNecesarias(m,j)*UProducidas(p,j)) <= (MaquinasDisp(p,m)-MaquinasMant(p,m))*HrsDispMaquina(p,m));
+@FOR(CapMaquinas(Per,Maq):
+  [Capacidad]@SUM(Fabricacion(Per,Prod):HrsNecesarias(Maq,Prod)*UProducidas(Per,Prod)) <= (MaquinasDisp(Per,Maq)-MaquinasMant(Per,Maq))*HrsDispMaquina(Per,Maq));
 
 !Limitación de mercado;
 
-@FOR(Fabricacion(i,j):[MAS_Ventas]@BND(0,UVendidas(i,j),MasVentas(i,j)));
+@FOR(Fabricacion(Per,Prod):[MAS_Ventas]@BND(0,UVendidas(Per,Prod),MaxVentas(Per,Prod)));
 
 !Existencias en el mes de Junio;
 
-@FOR(Fabricacion(i,j) | i #EQ# 6: [STOCK_JUNIO]UStock(i,j)=50);
+@FOR(Fabricacion(Per,Prod) | Per #EQ# 6: [STOCK_JUNIO]UStock(Per,Prod)=50);
 
 !Capacidad de almacenamiento;
 
-@FOR(Fabricacion(i,j) | #NE# 6: @BND(0,UStock, MaxStock(i,j)));
+@FOR(Fabricacion(Per,Prod) | Per #NE# 6: @BND(0,UStock, MaxStock(Per,Prod)));
 
 !Maximizar el beneficio total;
 [Beneficio_Total]
-MAX = @SUM(Fabricacion(i,j):
+sMAX = @SUM(Fabricacion(i,j):
 (Beneficio(j) * UVendidas(i,j) - CosteStock(i,j) * UStock(i,j)));

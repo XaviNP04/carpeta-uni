@@ -1,0 +1,19 @@
+!ASIGNACION DE PERSONAL;
+
+Min=14*(35*An1+41*An2+27*An3+40*An4)+
+    12*(47*Iv1+45*Iv2+32Iv3+51Iv4)+
+    13*(39Ju1+56Ju2+36Ju3+43Ju4)+
+    15*(32Su1+51Su2+25Su3+46Su4);
+
+!cada treballador fa una faena;
+[Ana] An1+An2+An3+An4 = 1;
+[Ivan] Iv1+Iv2+Iv3+Iv4 = 1;
+[Juan] Ju1+Ju2+Ju3+Ju4 = 1;
+[Susana] Su1+Su2+Su3+Su4 = 1;
+
+!cadad faena la fa un treballador;
+
+[ProcTexto] An1+Iv1+Ju1+Su1 = 1;
+[Graficos] An2+Iv2+Ju2+Su1 = 1;
+[Packs] An3+Iv3+Ju3+Su1 = 1;
+[Inscripciones] An4+Iv4+Ju4+Su1 = 1;
