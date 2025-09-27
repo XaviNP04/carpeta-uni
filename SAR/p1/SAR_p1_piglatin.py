@@ -2,7 +2,6 @@
 #! -*- encoding: utf8 -*-
 
 # 1.- Pig Latin
-# Autor: Xavier Naya Pons
 
 import re
 import sys
@@ -31,21 +30,23 @@ class Translator():
         :return: la palabra traducida
         """
         # ------------------------------------------------------------
-        vocals = re.compile(r'[aeiouy]+')
-        if not word[0].isalpha() or word in ".,;?!":
+        vocals = 'aeiouy'
+        if not word[0].isalpha():
             return word
-        elif not vocals.match(word[0]): # si es una consonant
+        elif not word[0] in vocals: # si es una consonant
 
-            posVoc = vocals.search(word.lower()).start()
+            posVocal = 1
 
-            new_word=f"{word[posVoc:]}{word[:posVoc]}ay"
+            while word[posVocal] not in vocals:
+                posVocal+=1
+
+            new_word=f"{word[posVocal:]}{word[:posVocal]}ay"
+
         else:
             new_word=f"{word}yay"
 
         if word[0].isupper():
             new_word=new_word.capitalize()
-        if word.isupper():
-            new_word=new_word.upper()
 
         return new_word
         # ------------------------------------------------------------
@@ -62,12 +63,12 @@ class Translator():
 
         new_sentence = ""
         aux = self.re.split(sentence)
+        print(aux)
         for w in aux:
-            if w not in ".,;?!":
+            if w not in punt:
                 new_sentence += self.translate_word(w)
             else:
                 new_sentence += w
-
         return new_sentence
         # ------------------------------------------------------------
 
@@ -84,12 +85,7 @@ class Translator():
         
         # ------------------------------------------------------------
 
-        f = open(filename, "r")
-        n = open(f"{filename[:len(filename)-4]}_latin.txt", "w")
 
-        n.write(self.translate_sentence(f.read()))
-
-        n.close()
 
         # ------------------------------------------------------------
 
