@@ -44,7 +44,7 @@ def comprobar_edicion():
 
     for nombre,funcion in opcionesEdicion.items():
         print("Probando funcion",nombre)
-        print("-"*70)
+        print("="*100)
         for original, nueva in bateria_test:
             distancia, secuencia = funcion(original, nueva)
             print(f"\nComprobando si {nombre}({original},{nueva}) == {distancia}\noperaciones: {secuencia}")
